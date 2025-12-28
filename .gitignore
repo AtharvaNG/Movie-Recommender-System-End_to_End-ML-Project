@@ -212,3 +212,4 @@ __marimo__/
 .virtual_documents
 anaconda_projects
 data
+test_ingestion.py
