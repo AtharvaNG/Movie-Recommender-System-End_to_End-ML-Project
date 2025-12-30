@@ -1,5 +1,8 @@
 import pandas as pd
 import ast
+import nltk
+from nltk.stem.porter import PorterStemmer
+ps=PorterStemmer()
 
 def select_relevant_columns(df):
     # keep only relevant columns in the data
@@ -36,7 +39,11 @@ def convert_crew(obj):
     
     return L
 
-
+def steming(text):
+    y=[]
+    for i in text.split():
+        y.append(ps.stem(i))
+    return " ".join(y)
 
 def apply_basic_cleaning(df):
     df['genres']=df['genres'].apply(convert)
@@ -61,4 +68,9 @@ def apply_basic_cleaning(df):
 
     #creating final df
     final_df=df[['id','title','tags']]
-    return final_df
+
+    #adding stemming to tags of final_df
+    new_df=final_df.copy()
+    new_df['tags']=new_df['tags'].apply(steming)
+    
+    return new_df
