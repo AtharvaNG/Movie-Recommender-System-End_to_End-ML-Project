@@ -214,3 +214,4 @@ anaconda_projects
 data
 test_ingestion.py
 test_data_preprocessing.py
+test_feature_engineering.py
