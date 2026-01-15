@@ -3,6 +3,7 @@ import requests
 import time
 from dotenv import load_dotenv
 import os
+import streamlit as st
 from src.components.feature_engineering import generate_similarity,generate_vectors
 
 #Load artifacts
@@ -28,6 +29,13 @@ load_dotenv()  #loads variables form .env
 API_KEY=os.getenv("TMDB_API_KEY")
 session = requests.Session()
 
+#since render is not able to load similarity so we will cache similarity
+@st.cache_resource
+def load_similarity():
+    vectors=generate_vectors(movies)
+    similarity=generate_similarity(vectors)
+    return similarity
+
 def fetch_poster(movie_id, retries=3):
     
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}&language=en-US"
@@ -47,26 +55,27 @@ def fetch_poster(movie_id, retries=3):
 
 
 #globals
-_vectors=None
-_similarity=None
+# _vectors=None
+# _similarity=None
 
 #this function will prevent the generation of similarity everytime we refresh the page
-def get_similarity():
-    global _vectors,_similarity
-    if _similarity is None:
-        _vectors=generate_vectors(movies)
-        _similarity=generate_similarity(_vectors)
+# def get_similarity():
+#     global _vectors,_similarity
+#     if _similarity is None:
+#         _vectors=generate_vectors(movies)
+#         _similarity=generate_similarity(_vectors)
     
-    return _similarity
+#     return _similarity
 
 def recommend(movie_name):
-    
+    similarity=load_similarity()
+
     if movie_name not in movies['title'].values:
         return [],[],"Movie not found"
 
     movie_index=movies[movies['title']==movie_name].index[0]
 
-    similarity=get_similarity()
+    
 
     sim_arr=similarity[movie_index] #similarity metrics (array) of the movie with othe movies
 
