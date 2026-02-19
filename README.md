@@ -44,16 +44,25 @@ Movie-Recommender-System/
 │── README.md
 The project is organized into clear components to separate data processing, model logic, and application code.
 
+```
+
+---
+
 ## Setup & Run
-
 git clone https://github.com/AtharvaNG/Movie-Recommender-System-End_to_End-ML-Project.git
-cd Movie-Recommender-System-End_to_End-ML-Project
-pip install -r requirements.txt
-streamlit run app.py
-Note: A TMDB API key is required to fetch movie posters.
-Set it as an environment variable:
 
+cd Movie-Recommender-System-End_to_End-ML-Project
+
+pip install -r requirements.txt
+
+streamlit run app.py
+
+Note: A TMDB API key is required to fetch movie posters.
+
+Set it as an environment variable:
 TMDB_API_KEY=your_api_key
+
+---
 
 ## Output
 A web interface where users select a movie from a dropdown
@@ -61,14 +70,12 @@ A web interface where users select a movie from a dropdown
 Displays the top recommended similar movies along with their posters
 
 Recommendations are generated using cosine similarity on textual movie features
-<img width="1919" height="882" alt="image" src="https://github.com/user-attachments/assets/68b36bec-2680-4308-a77d-0e469e19b668" />
 
-<img width="1917" height="888" alt="image" src="https://github.com/user-attachments/assets/742d2642-c901-42b0-afca-f6e73c645ab5" />
-
-
+---
 
 ## Author
-Atharva
+Atharva Nitin Gholap
 
 GitHub: https://github.com/AtharvaNG
+
 LinkedIn: https://www.linkedin.com/in/atharva-gholap-67739828b/
